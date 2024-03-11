@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
 
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import HowWorks from './components/HowWorks';
+import Price from './components/Price';
+import Footer from './components/Footer';
+import SurveyComponent from './components/Survey';
+import { useState } from 'react';
+import SurveyContext from './context/SurveyContext';
+
 function App() {
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [mailContext, setMailContext] = useState('');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SurveyContext.Provider
+      value={{
+        showSurvey,
+        setShowSurvey,
+        mailContext,
+        setMailContext,
+      }}
+    >
+      <main className='lg:mt-20 lg:mx-20 lg:p-12 bg-white mt-4 mx-4 p-8 mb-4 lg:mb-24 rounded'>
+        <Header />
+        <Hero />
+        <SurveyComponent showSurvey={showSurvey} />
+        <About />
+        <HowWorks />
+        {/* <Price /> */}
+        <Footer />
+      </main>
+    </SurveyContext.Provider>
   );
 }
 
